@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07040b">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Xinblack — music, visual worlds, creative technology, and immersive digital experiences.">
+  <meta property="og:title" content="XINBLACK — Music / Visual Worlds / Creative Technology">
+  <meta property="og:description" content="Enter the signal. Music, visual worlds, creative technology, and immersive digital experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xinblackmusic.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>XINBLACK — Music / Visual Worlds / Creative Technology</title>
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/assets/xinblack-mark.svg" type="image/svg+xml">
+  <style>
+    :root{
+      --bg:#07040b;--bg2:#0d0712;--ink:#f8f3ff;--muted:#a99ab4;--line:#2b1937;
+      --pink:#ff3ca6;--violet:#8c5cff;--cyan:#65f4ff;--acid:#c9ff4c;--gold:#ffc968;
+      --glass:rgba(16,8,23,.72);--glass2:rgba(27,12,37,.76);--r:24px;
+      --shadow:0 30px 90px rgba(0,0,0,.48);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{margin:0;background:
+      radial-gradient(circle at 80% 3%,rgba(140,92,255,.22),transparent 28%),
+      radial-gradient(circle at 4% 25%,rgba(255,60,166,.16),transparent 24%),
+      radial-gradient(circle at 70% 78%,rgba(101,244,255,.08),transparent 28%),
+      var(--bg);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden
+    }
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;z-index:100;
+      background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.035) 4px,transparent 5px)}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    img,canvas,svg{display:block;max-width:100%}
+    .shell{width:min(1180px,calc(100% - 28px));margin:auto}
+    .skip{position:absolute;left:-999px;top:0}.skip:focus{left:14px;top:14px;z-index:999;background:#fff;color:#000;padding:10px 14px;border-radius:10px}
+    .nav{position:sticky;top:0;z-index:90;background:linear-gradient(180deg,rgba(7,4,11,.92),rgba(7,4,11,.58),transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .navin{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.17em;font-size:.83rem}
+    .brand img{width:30px;height:30px}
+    .links{display:flex;gap:20px;align-items:center;color:#cdbfd7;font-size:.82rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+    .links a:hover,.links a:focus{color:var(--cyan)}
+    .menu{display:none;background:#140b1d;border:1px solid #392246;color:#fff;border-radius:12px;padding:9px 11px}
+    .hero{min-height:86svh;display:grid;align-items:center;padding:64px 0 50px;position:relative}
+    #signalCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.78;mask-image:linear-gradient(90deg,transparent 0,#000 17%,#000 100%);z-index:0}
+    .heroGrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(310px,.65fr);gap:28px;align-items:end;position:relative;z-index:2}
+    .kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:.19em;font-weight:950;font-size:.76rem}
+    h1,h2,h3{margin:0;font-family:"Arial Narrow","Helvetica Neue Condensed",Impact,Haettenschweiler,sans-serif;text-transform:uppercase;letter-spacing:-.045em}
+    h1{font-size:clamp(5.1rem,15vw,10.8rem);line-height:.72;margin:18px 0 24px;max-width:920px;text-shadow:0 0 40px rgba(255,60,166,.12)}
+    h1 .x1{display:block}.x2{display:block;color:transparent;-webkit-text-stroke:1px rgba(248,243,255,.64);transform:translateX(clamp(18px,5vw,66px))}
+    .lede{max-width:690px;font:clamp(1.15rem,2.4vw,1.55rem)/1.34 Georgia,serif;color:#e7ddeb}
+    .ctaRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+    .btn{border:1px solid #493056;background:#120a19;color:#fff;border-radius:999px;padding:13px 18px;font-weight:900;letter-spacing:.035em;transition:.2s transform,.2s border-color,.2s background}
+    .btn:hover,.btn:focus{transform:translateY(-2px);border-color:var(--pink)}
+    .btn.primary{border:0;color:#09050d;background:linear-gradient(90deg,var(--cyan),var(--pink) 52%,var(--acid));box-shadow:0 12px 44px rgba(255,60,166,.18)}
+    .signalCard{background:linear-gradient(150deg,rgba(19,9,27,.82),rgba(10,6,15,.84));border:1px solid #382444;border-radius:28px;padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .signalCard:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--pink);filter:blur(80px);opacity:.1;right:-70px;top:-80px}
+    .label{font:800 .72rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--pink);letter-spacing:.12em;text-transform:uppercase}
+    .signalCard h2{font-size:3rem;line-height:.88;margin:13px 0}
+    .meter{height:80px;display:flex;align-items:end;gap:5px;margin:20px 0}
+    .meter i{display:block;width:8px;min-height:9%;height:var(--h);background:linear-gradient(180deg,var(--cyan),var(--pink));border-radius:8px;animation:breathe calc(1.2s + var(--d)) ease-in-out infinite alternate;transform-origin:bottom}
+    @keyframes breathe{to{transform:scaleY(.3);opacity:.45}}
+    .signalMeta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .sig{border:1px solid #2b1b35;background:#0b0710;border-radius:14px;padding:10px}.sig b{display:block;color:var(--acid);font-size:1.1rem}.sig span{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+    .section{padding:86px 0}
+    .sectionHead{display:grid;grid-template-columns:.62fr 1fr;gap:24px;align-items:end;margin-bottom:30px}
+    .sectionHead h2{font-size:clamp(3rem,7vw,6.4rem);line-height:.78}
+    .sectionHead p{margin:0;max-width:650px;color:#c7b8d0;font:1.05rem/1.55 Georgia,serif}
+    .signalStage{position:relative;border:1px solid #352241;border-radius:30px;min-height:510px;overflow:hidden;background:#08050c;box-shadow:var(--shadow)}
+    #stageCanvas{position:absolute;inset:0;width:100%;height:100%}
+    .stageUi{position:absolute;inset:auto 18px 18px 18px;display:flex;justify-content:space-between;gap:10px;align-items:end;z-index:3}
+    .stageCopy{max-width:540px;background:rgba(7,4,11,.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:14px 16px}
+    .stageCopy strong{font-size:1.15rem}.stageCopy p{margin:3px 0 0;color:#c7bacf}
+    .mutate{white-space:nowrap}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .route{min-height:290px;border:1px solid #352241;background:linear-gradient(180deg,#130a1b,#09050e);border-radius:22px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+    .route:before{content:"";position:absolute;inset:auto -35% 34% auto;width:150px;height:150px;border-radius:50%;background:var(--tone,var(--pink));filter:blur(44px);opacity:.23}
+    .route small{color:var(--cyan);font-weight:900;letter-spacing:.14em}.route h3{font-size:2.2rem;line-height:.9;margin:12px 0}.route p{color:#bfaec9;margin:0 0 20px}
+    .route .state{font:800 .72rem ui-monospace,monospace;letter-spacing:.08em;color:#d9ccdF;border-top:1px solid #2a1a33;padding-top:12px}
+    .gallery{display:grid;grid-template-columns:1.25fr .75fr .75fr;grid-auto-rows:260px;gap:12px}
+    .frame{position:relative;overflow:hidden;border:1px solid #352241;border-radius:22px;background:#0d0712}
+    .frame.big{grid-row:span 2}
+    .art{position:absolute;inset:0;background:
+      radial-gradient(circle at 70% 25%,var(--a,#ff3ca6) 0 8%,transparent 9%),
+      radial-gradient(circle at 30% 60%,var(--b,#65f4ff) 0 14%,transparent 15%),
+      conic-gradient(from var(--rot,25deg) at 60% 42%,transparent 0 12%,rgba(255,255,255,.08) 13% 18%,transparent 19% 38%,rgba(255,60,166,.11) 39% 47%,transparent 48%),
+      linear-gradient(145deg,#140918,#050309)}
+    .art:after{content:"";position:absolute;inset:-20%;background:repeating-radial-gradient(circle at 50% 50%,transparent 0 18px,rgba(255,255,255,.055) 19px,transparent 20px 35px);transform:rotate(12deg)}
+    .frame:nth-child(2) .art{--a:#c9ff4c;--b:#8c5cff;--rot:110deg}.frame:nth-child(3) .art{--a:#ffc968;--b:#ff3ca6;--rot:220deg}.frame:nth-child(4) .art{--a:#65f4ff;--b:#c9ff4c;--rot:310deg}.frame:nth-child(5) .art{--a:#8c5cff;--b:#ffc968;--rot:60deg}
+    .cap{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;gap:10px;align-items:end}
+    .cap span{background:rgba(7,4,11,.68);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:11px;font-weight:900;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+    .projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .project{border:1px solid #352241;border-radius:26px;background:linear-gradient(145deg,#120919,#09050e);padding:24px;position:relative;overflow:hidden;min-height:290px}
+    .project:after{content:"";position:absolute;width:240px;height:240px;border:32px solid rgba(255,255,255,.04);border-radius:50%;right:-70px;bottom:-90px}
+    .project h3{font-size:3rem;line-height:.86;margin:14px 0}.project p{color:#c5b7ce;max-width:560px}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}.tag{border:1px solid #372245;border-radius:999px;padding:6px 9px;color:#cabbd3;font-size:.73rem;font-weight:800}
+    .epk{display:grid;grid-template-columns:1fr .8fr;gap:14px}
+    .epkMain,.epkSide{border:1px solid #352241;border-radius:26px;background:#0d0712;padding:24px}
+    .epkMain h3{font-size:clamp(3rem,7vw,5.6rem);line-height:.8;margin:14px 0 20px}.epkMain p{color:#c9bacf;font-size:1.05rem}
+    .facts{display:grid;gap:8px}.fact{display:grid;grid-template-columns:120px 1fr;gap:14px;border-bottom:1px solid #2a1833;padding:11px 0}.fact b{color:var(--cyan);font-size:.73rem;letter-spacing:.08em;text-transform:uppercase}.fact span{color:#e9e1ed}
+    .contact{display:grid;grid-template-columns:.7fr 1fr;gap:18px}
+    .contact h2{font-size:clamp(3.2rem,8vw,7rem);line-height:.76}
+    form{border:1px solid #352241;background:#0d0712;border-radius:26px;padding:20px;display:grid;gap:10px}
+    .field{display:grid;gap:6px}.field label{font-size:.75rem;font-weight:900;color:#c8bad0;letter-spacing:.08em;text-transform:uppercase}
+    .field input,.field textarea,.field select{width:100%;border:1px solid #3a2647;background:#08050d;color:#fff;border-radius:13px;padding:12px 13px;outline:none}
+    .field textarea{min-height:130px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,60,166,.09)}
+    .hp{position:absolute;left:-10000px}
+    .footer{padding:30px 0 44px;border-top:1px solid #26172d;color:#8f809a;font-size:.79rem;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .statusDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 14px var(--acid);margin-right:6px}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;z-index:300;background:#140b1c;border:1px solid #513060;color:#fff;padding:11px 15px;border-radius:999px;transition:.25s;pointer-events:none;box-shadow:var(--shadow)}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){
+      .heroGrid,.sectionHead,.epk,.contact{grid-template-columns:1fr}.hero{min-height:auto;padding-top:84px}.signalCard{max-width:600px}.grid4{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}.frame.big{grid-row:span 1;grid-column:span 2}.projects{grid-template-columns:1fr}
+    }
+    @media(max-width:620px){
+      .links{display:none}.links.open{display:flex;position:absolute;top:62px;left:14px;right:14px;flex-direction:column;align-items:stretch;background:#0e0713;border:1px solid #352241;border-radius:18px;padding:14px;box-shadow:var(--shadow)}.menu{display:block}
+      h1{font-size:clamp(4.6rem,25vw,7rem)}.x2{transform:translateX(18px)}
+      .grid4{grid-template-columns:1fr}.gallery{grid-template-columns:1fr;grid-auto-rows:245px}.frame.big{grid-column:span 1}.stageUi{align-items:stretch;flex-direction:column}.mutate{width:100%}.section{padding:66px 0}.signalMeta{grid-template-columns:1fr 1fr}.fact{grid-template-columns:1fr;gap:2px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.meter i{animation:none}.btn{transition:none}#signalCanvas,#stageCanvas{opacity:.25}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="shell navin">
+      <a class="brand" href="#top" aria-label="Xinblack home"><img src="/assets/xinblack-mark.svg" alt=""><span>XINBLACK</span></a>
+      <div class="links" id="navLinks">
+        <a href="#listen">Listen</a><a href="#visuals">Visuals</a><a href="#projects">Projects</a><a href="#epk">EPK</a><a href="#contact">Contact</a>
+      </div>
+      <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <canvas id="signalCanvas" aria-hidden="true"></canvas>
+    <div class="shell heroGrid">
+      <div>
+        <div class="kicker">Music / Visual Worlds / Creative Technology</div>
+        <h1><span class="x1">XIN</span><span class="x2">BLACK</span></h1>
+        <p class="lede">An artist world built to move between sound, visual atmosphere, experimental media, and immersive digital experiences.</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="#listen">ENTER THE SIGNAL</a>
+          <a class="btn" href="#epk">VIEW EPK</a>
+        </div>
+      </div>
+      <aside class="signalCard" aria-label="Signal status">
+        <div class="label">LIVE SYSTEM / SIGNAL 001</div>
+        <h2>THE WORLD MOVES WITH THE SOUND.</h2>
+        <div class="meter" aria-hidden="true">
+          <i style="--h:38%;--d:.1s"></i><i style="--h:72%;--d:.3s"></i><i style="--h:43%;--d:.5s"></i><i style="--h:88%;--d:.2s"></i><i style="--h:58%;--d:.8s"></i><i style="--h:94%;--d:.4s"></i><i style="--h:49%;--d:.6s"></i><i style="--h:78%;--d:.2s"></i><i style="--h:60%;--d:.7s"></i><i style="--h:97%;--d:.1s"></i><i style="--h:45%;--d:.4s"></i><i style="--h:73%;--d:.5s"></i>
+        </div>
+        <div class="signalMeta">
+          <div class="sig"><b>01</b><span>Artist World</span></div>
+          <div class="sig"><b>∞</b><span>Visual Modes</span></div>
+          <div class="sig"><b>LIVE</b><span>Interactive</span></div>
+          <div class="sig"><b>2026</b><span>Current Build</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" id="listen">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>LISTENING<br>ROOM</h2>
+          <p>One front door for the catalog, release worlds, streaming destinations, and audiovisual experiments. Dead links stay hidden until an official destination is configured.</p>
+        </div>
+        <div class="grid4">
+          <article class="route" style="--tone:#ff3ca6"><div><small>01 / MUSIC</small><h3>CATALOG</h3><p>Releases, works in progress, alternate versions, and the growing Xinblack sound archive.</p></div><div class="state">ROUTE / CATALOG READY</div></article>
+          <article class="route" style="--tone:#65f4ff"><div><small>02 / STREAM</small><h3>LINKS</h3><p>A single place for official streaming destinations without turning the site into a generic link page.</p></div><div class="state">ROUTE / OFFICIAL LINKS ONLY</div></article>
+          <article class="route" style="--tone:#c9ff4c"><div><small>03 / AUDIOVISUAL</small><h3>RELEASE WORLDS</h3><p>Visualizers, moving artwork, interactive scenes, and media that changes with the sound.</p></div><div class="state">MODE / IMMERSIVE WEB</div></article>
+          <article class="route" style="--tone:#8c5cff"><div><small>04 / RIGHTS</small><h3>LICENSING</h3><p>Clear paths for collaboration, placement, creative direction, and licensing inquiries.</p></div><div class="state">CONTACT / HUMAN REVIEW</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="signal-lab-title">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2 id="signal-lab-title">SIGNAL<br>LAB</h2>
+          <p>A lightweight procedural visual scene lives directly in the site, so the page still feels alive even before any premium video or audio asset loads.</p>
+        </div>
+        <div class="signalStage" id="signalStage">
+          <canvas id="stageCanvas" aria-label="Interactive abstract Xinblack signal visualization"></canvas>
+          <div class="stageUi">
+            <div class="stageCopy"><strong>Reactive visual atmosphere</strong><p>Move, tap, or press mutate. Motion automatically simplifies when reduced-motion is enabled.</p></div>
+            <button class="btn primary mutate" id="mutateBtn" type="button">MUTATE SIGNAL</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="visuals">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>VISUAL<br>ARCHIVE</h2>
+          <p>The visual identity is built around controlled mutation: recognizable Xinblack DNA, different surfaces, and enough recovery space that the art never dissolves into noise.</p>
+        </div>
+        <div class="gallery">
+          <article class="frame big"><div class="art"></div><div class="cap"><span>Moving Poster / 001</span><span>Psychotronic</span></div></article>
+          <article class="frame"><div class="art"></div><div class="cap"><span>Signal Field / 002</span></div></article>
+          <article class="frame"><div class="art"></div><div class="cap"><span>Night Bloom / 003</span></div></article>
+          <article class="frame"><div class="art"></div><div class="cap"><span>Frequency / 004</span></div></article>
+          <article class="frame"><div class="art"></div><div class="cap"><span>Afterimage / 005</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>PROJECT<br>WORLDS</h2>
+          <p>Xinblack is treated as a creative system, not just a discography page. Music can become visual broadcasts, live-reactive scenes, release microsites, and reusable media formats.</p>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="label">PROTOTYPE / AUDIOVISUAL BROADCAST</div>
+            <h3>XINBLACK DREAM RADIO</h3>
+            <p>A music-first audiovisual station concept where tracks become the timing structure and visuals mutate around section changes, drops, quiet passages, and texture.</p>
+            <div class="tags"><span class="tag">music-first</span><span class="tag">procedural visuals</span><span class="tag">broadcast</span><span class="tag">long-form</span></div>
+          </article>
+          <article class="project">
+            <div class="label">EXPERIMENT / REACTIVE MEDIA</div>
+            <h3>VISUAL WORLDS</h3>
+            <p>Browser-native experiments combine generated graphics, moving fields, media composition, and responsive visual behavior into low-friction immersive experiences.</p>
+            <div class="tags"><span class="tag">WebGL-ready</span><span class="tag">interactive</span><span class="tag">visualizer</span><span class="tag">mobile</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="epk">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>EPK /<br>PRESS</h2>
+          <p>A concise artist and media-kit layer for collaborators, publications, venues, brands, and licensing conversations.</p>
+        </div>
+        <div class="epk">
+          <article class="epkMain">
+            <div class="label">ARTIST SUMMARY</div>
+            <h3>MUSIC THAT BUILDS WORLDS.</h3>
+            <p>Xinblack is an independent music and multimedia project spanning music releases, visual systems, experimental media, artwork, and immersive digital experiences.</p>
+            <div class="ctaRow"><button class="btn primary" id="copyEpk" type="button">COPY EPK SUMMARY</button><a class="btn" href="#contact">CONTACT</a></div>
+          </article>
+          <aside class="epkSide">
+            <div class="facts">
+              <div class="fact"><b>Format</b><span>Music + multimedia artist project</span></div>
+              <div class="fact"><b>Focus</b><span>Sound, visual atmosphere, interactive media</span></div>
+              <div class="fact"><b>Use</b><span>Artist portfolio, releases, EPK, licensing</span></div>
+              <div class="fact"><b>Experience</b><span>Mobile-first, responsive, reduced-motion aware</span></div>
+              <div class="fact"><b>Site state</b><span><i class="statusDot"></i>Live runtime restored</span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell contact">
+        <div>
+          <div class="kicker">Bookings / Licensing / Collaboration</div>
+          <h2>MAKE<br>CONTACT.</h2>
+          <p class="lede">Send the context once. The inquiry arrives as a structured Netlify form submission for human review.</p>
+        </div>
+        <form name="xinblack-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=1#contact">
+          <input type="hidden" name="form-name" value="xinblack-contact">
+          <p class="hp"><label>Do not fill this out: <input name="bot-field"></label></p>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" name="email" autocomplete="email" required></div>
+          <div class="field"><label for="intent">What is this about?</label><select id="intent" name="intent" required><option value="">Choose one</option><option>Booking / performance</option><option>Music licensing / placement</option><option>Creative collaboration</option><option>Press / interview</option><option>Visual / digital project</option><option>Other</option></select></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" required placeholder="What are you making, when, and what do you need?"></textarea></div>
+          <button class="btn primary" type="submit">SEND INQUIRY</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    <span>© 2026 XINBLACK / ALL RIGHTS RESERVED</span>
+    <span>BUILT AS AN IMMERSIVE ARTIST FRONT DOOR — NOT A LINK TREE.</span>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var menuBtn=document.getElementById('menuBtn'), nav=document.getElementById('navLinks');
+      menuBtn.addEventListener('click',function(){var open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));});
+      nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
+
+      var toast=document.getElementById('toast');
+      function say(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},2200)}
+      var epk='Xinblack is an independent music and multimedia project spanning music releases, visual systems, experimental media, artwork, and immersive digital experiences.';
+      document.getElementById('copyEpk').addEventListener('click',function(){
+        if(navigator.clipboard && navigator.clipboard.writeText){navigator.clipboard.writeText(epk).then(function(){say('EPK summary copied')}).catch(function(){say('Copy failed — select the text manually')});}
+        else{say('Clipboard unavailable')}
+      });
+      if(new URLSearchParams(location.search).get('sent')==='1'){say('Inquiry sent — thank you.');history.replaceState({},'',location.pathname+'#contact');}
+
+      function setupCanvas(id,mode){
+        var canvas=document.getElementById(id),ctx=canvas.getContext('2d'),w=0,h=0,t=0,seed=1,pointer={x:.62,y:.42};
+        function resize(){var r=canvas.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);w=Math.max(1,Math.floor(r.width*d));h=Math.max(1,Math.floor(r.height*d));canvas.width=w;canvas.height=h;ctx.setTransform(d,0,0,d,0,0);w=r.width;h=r.height}
+        function rand(n){return (Math.sin(n*12.9898+seed*78.233)*43758.5453)%1}
+        function draw(){
+          t+=reduced?0:.008;
+          ctx.clearRect(0,0,w,h);
+          var bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,'rgba(7,4,11,.15)');bg.addColorStop(1,'rgba(18,6,25,.55)');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+          var count=mode==='stage'?28:18;
+          for(var i=0;i<count;i++){
+            var a=t*(.38+(i%5)*.05)+i*.72+seed*.4,rad=(Math.min(w,h)*(.12+.02*(i%6))),cx=w*(.1+.82*Math.abs(Math.sin(a*.31+i))),cy=h*(.1+.8*Math.abs(Math.cos(a*.27+i*.6)));
+            cx=(cx+pointer.x*w*.22)/1.22;cy=(cy+pointer.y*h*.16)/1.16;
+            var hue=[326,185,83,258][i%4],alpha=.045+.035*(i%3);
+            ctx.strokeStyle='hsla('+hue+',95%,68%,'+alpha+')';ctx.lineWidth=1+(i%3)*.4;ctx.beginPath();
+            ctx.ellipse(cx,cy,rad*(1+.5*Math.sin(a)),rad*(.35+.35*Math.cos(a*.8)),a*.3,0,Math.PI*2);ctx.stroke();
+          }
+          if(mode==='stage'){
+            for(var j=0;j<44;j++){var x=(j/43)*w,y=h*.5+Math.sin(j*.7+t*7+seed)*h*.12*Math.sin(j*.15+seed);ctx.fillStyle='rgba(255,255,255,'+(.04+(j%5)*.012)+')';ctx.fillRect(x,y,1,Math.max(2,Math.abs(Math.sin(j+t*5))*55));}
+          }
+          if(!reduced) requestAnimationFrame(draw);
+        }
+        function move(e){var r=canvas.getBoundingClientRect(),p=e.touches?e.touches[0]:e;pointer.x=Math.max(0,Math.min(1,(p.clientX-r.left)/r.width));pointer.y=Math.max(0,Math.min(1,(p.clientY-r.top)/r.height));if(reduced)draw()}
+        canvas.addEventListener('pointermove',move,{passive:true});canvas.addEventListener('touchmove',move,{passive:true});
+        window.addEventListener('resize',resize,{passive:true});resize();draw();
+        return {mutate:function(){seed=(seed+1)%999;t+=1.7;if(reduced)draw()}};
+      }
+      setupCanvas('signalCanvas','hero');
+      var stage=setupCanvas('stageCanvas','stage');
+      document.getElementById('mutateBtn').addEventListener('click',function(){stage.mutate();say('Signal mutated')});
+    })();
+  </script>
+</body>
+</html>

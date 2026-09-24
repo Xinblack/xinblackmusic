@@ -1,0 +1,17 @@
+{
+  "name": "Xinblack Music",
+  "short_name": "Xinblack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07040b",
+  "theme_color": "#07040b",
+  "description": "Music, visual worlds, creative technology, and immersive digital experiences.",
+  "icons": [
+    {
+      "src": "/assets/xinblack-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
