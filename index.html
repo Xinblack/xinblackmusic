@@ -92,7 +92,7 @@
     .frame:nth-child(2) .art{--a:#c9ff4c;--b:#8c5cff;--rot:110deg}.frame:nth-child(3) .art{--a:#ffc968;--b:#ff3ca6;--rot:220deg}.frame:nth-child(4) .art{--a:#65f4ff;--b:#c9ff4c;--rot:310deg}.frame:nth-child(5) .art{--a:#8c5cff;--b:#ffc968;--rot:60deg}
     .cap{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;gap:10px;align-items:end}
     .cap span{background:rgba(7,4,11,.68);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:11px;font-weight:900;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
-    .projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}.commerceGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.commerceCard{border:1px solid #352241;border-radius:26px;background:linear-gradient(145deg,#120919,#09050e);padding:24px}.commerceCard h3{font-size:clamp(2.5rem,5vw,4.3rem);line-height:.84;margin:14px 0}.commerceCard>p{color:#c5b7ce}.commerceCard form{margin-top:18px;padding:14px;background:#09050e;border-radius:18px}
     .project{border:1px solid #352241;border-radius:26px;background:linear-gradient(145deg,#120919,#09050e);padding:24px;position:relative;overflow:hidden;min-height:290px}
     .project:after{content:"";position:absolute;width:240px;height:240px;border:32px solid rgba(255,255,255,.04);border-radius:50%;right:-70px;bottom:-90px}
     .project h3{font-size:3rem;line-height:.86;margin:14px 0}.project p{color:#c5b7ce;max-width:560px}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}.tag{border:1px solid #372245;border-radius:999px;padding:6px 9px;color:#cabbd3;font-size:.73rem;font-weight:800}
@@ -112,7 +112,7 @@
     .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;z-index:300;background:#140b1c;border:1px solid #513060;color:#fff;padding:11px 15px;border-radius:999px;transition:.25s;pointer-events:none;box-shadow:var(--shadow)}
     .toast.show{opacity:1;transform:translate(-50%,0)}
     @media(max-width:900px){
-      .heroGrid,.sectionHead,.epk,.contact{grid-template-columns:1fr}.hero{min-height:auto;padding-top:84px}.signalCard{max-width:600px}.grid4{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}.frame.big{grid-row:span 1;grid-column:span 2}.projects{grid-template-columns:1fr}
+      .heroGrid,.sectionHead,.epk,.contact,.commerceGrid{grid-template-columns:1fr}.hero{min-height:auto;padding-top:84px}.signalCard{max-width:600px}.grid4{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}.frame.big{grid-row:span 1;grid-column:span 2}.projects{grid-template-columns:1fr}
     }
     @media(max-width:620px){
       .links{display:none}.links.open{display:flex;position:absolute;top:62px;left:14px;right:14px;flex-direction:column;align-items:stretch;background:#0e0713;border:1px solid #352241;border-radius:18px;padding:14px;box-shadow:var(--shadow)}.menu{display:block}
@@ -128,7 +128,7 @@
     <div class="shell navin">
       <a class="brand" href="#top" aria-label="Xinblack home"><img src="/assets/xinblack-mark.svg" alt=""><span>XINBLACK</span></a>
       <div class="links" id="navLinks">
-        <a href="#listen">Listen</a><a href="#visuals">Visuals</a><a href="#projects">Projects</a><a href="#epk">EPK</a><a href="#contact">Contact</a>
+        <a href="#listen">Listen</a><a href="#visuals">Visuals</a><a href="#projects">Projects</a><a href="#beats">Beats + Merch</a><a href="#epk">EPK</a><a href="#contact">Contact</a>
       </div>
       <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="navLinks">MENU</button>
     </div>
@@ -233,6 +233,46 @@
       </div>
     </section>
 
+
+    <section class="section" id="beats">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>BEATS /<br>MERCH</h2>
+          <p>The old commercial inquiry routes are restored as first-class site flows instead of orphaned backend forms: beat/licensing requests and merch interest now live inside the same Xinblack world.</p>
+        </div>
+        <div class="commerceGrid">
+          <article class="commerceCard">
+            <div class="label">BEATS / PRODUCTION / SYNC</div>
+            <h3>FIND THE RIGHT SOUND.</h3>
+            <p>Use this route for beat licensing, custom production, sync/placement, or a catalog recommendation.</p>
+            <form name="beat-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=beat#beats">
+              <input type="hidden" name="form-name" value="beat-inquiry">
+              <p class="hp"><label>Do not fill this out: <input name="bot-field"></label></p>
+              <div class="field"><label for="beat-name">Name</label><input id="beat-name" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="beat-email">Email</label><input id="beat-email" type="email" name="email" autocomplete="email" required></div>
+              <div class="field"><label for="beat-interest">Interest</label><select id="beat-interest" name="interest" required><option value="">Choose one</option><option>Beat license</option><option>Custom production</option><option>Sync / placement</option><option>Catalog recommendation</option><option>Other</option></select></div>
+              <div class="field"><label for="beat-selection">Beat selection</label><select id="beat-selection" name="beat-selection"><option>Need a recommendation</option><option>I have a title / link — see message</option><option>Open to unreleased options</option></select></div>
+              <div class="field"><label for="beat-message">Message</label><textarea id="beat-message" name="message" placeholder="Project, usage, timeline, budget range, and any reference track."></textarea></div>
+              <button class="btn primary" type="submit">SEND BEAT INQUIRY</button>
+            </form>
+          </article>
+          <article class="commerceCard">
+            <div class="label">MERCH / PHYSICAL-DIGITAL</div>
+            <h3>GET THE DROP SIGNAL.</h3>
+            <p>Register interest without pretending inventory exists before it does. This route helps shape what should actually be produced.</p>
+            <form name="merch-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=merch#beats">
+              <input type="hidden" name="form-name" value="merch-interest">
+              <p class="hp"><label>Do not fill this out: <input name="bot-field"></label></p>
+              <div class="field"><label for="merch-name">Name</label><input id="merch-name" name="name" autocomplete="name"></div>
+              <div class="field"><label for="merch-email">Email</label><input id="merch-email" type="email" name="email" autocomplete="email" required></div>
+              <div class="field"><label for="merch-interest">What would you want?</label><select id="merch-interest" name="interest" required><option value="">Choose one</option><option>Apparel</option><option>Art print / poster</option><option>Physical music</option><option>Limited object / collectible</option><option>Digital + physical bundle</option></select></div>
+              <div class="field"><label for="merch-message">Notes</label><textarea id="merch-message" name="message" placeholder="Size, format, price range, or what would make the drop worth buying."></textarea></div>
+              <button class="btn primary" type="submit">REGISTER INTEREST</button>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
     <section class="section" id="epk">
       <div class="shell">
         <div class="sectionHead">
@@ -299,7 +339,7 @@
         if(navigator.clipboard && navigator.clipboard.writeText){navigator.clipboard.writeText(epk).then(function(){say('EPK summary copied')}).catch(function(){say('Copy failed — select the text manually')});}
         else{say('Clipboard unavailable')}
       });
-      if(new URLSearchParams(location.search).get('sent')==='1'){say('Inquiry sent — thank you.');history.replaceState({},'',location.pathname+'#contact');}
+      var sent=new URLSearchParams(location.search).get('sent');if(sent){say(sent==='beat'?'Beat inquiry sent.':sent==='merch'?'Merch interest registered.':'Inquiry sent — thank you.');history.replaceState({},'',location.pathname+(sent==='beat'||sent==='merch'?'#beats':'#contact'));}
 
       function setupCanvas(id,mode){
         var canvas=document.getElementById(id),ctx=canvas.getContext('2d'),w=0,h=0,t=0,seed=1,pointer={x:.62,y:.42};
